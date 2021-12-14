@@ -1,11 +1,11 @@
 package model.VO;
 
-public class UserInfoVO {
+public class UserVO {
 	private int usercode;
 	private String userid;
 	private String userpw;
 	private String username;
-	private int userphone;
+	private String userphone;
 	private String useremail;
 	
 	public int getUsercode() {
@@ -32,10 +32,10 @@ public class UserInfoVO {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public int getUserphone() {
+	public String getUserphone() {
 		return userphone;
 	}
-	public void setUserphone(int userphone) {
+	public void setUserphone(String userphone) {
 		this.userphone = userphone;
 	}
 	public String getUseremail() {
@@ -44,6 +44,8 @@ public class UserInfoVO {
 	public void setUseremail(String useremail) {
 		this.useremail = useremail;
 	}
+
+
 	@Override
 	public String toString() {
 		return "CoinVO [usercode=" + usercode + ", userid=" + userid + ", userpw=" + userpw + ", username=" + username
