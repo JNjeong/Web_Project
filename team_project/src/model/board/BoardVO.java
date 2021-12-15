@@ -1,4 +1,4 @@
-package model.VO;
+package model.board;
 
 public class BoardVO {
 	private int brdcode;

@@ -1,8 +1,8 @@
-package model.VO;
+package model.comment;
 
 public class CommentVO {
 	private int cmtcode;
-	private int cmdbrdcode;
+	private int cmtbrdcode;
 	private int cmtusercode;
 	private String cmtwriter;
 	private String cmtcontent;
@@ -13,11 +13,11 @@ public class CommentVO {
 	public void setCmtcode(int cmtcode) {
 		this.cmtcode = cmtcode;
 	}
-	public int getCmdbrdcode() {
-		return cmdbrdcode;
+	public int getCmdtrdcode() {
+		return cmtbrdcode;
 	}
-	public void setCmdbrdcode(int cmdbrdcode) {
-		this.cmdbrdcode = cmdbrdcode;
+	public void setCmtbrdcode(int cmtbrdcode) {
+		this.cmtbrdcode = cmtbrdcode;
 	}
 	public int getCmtusercode() {
 		return cmtusercode;
@@ -39,7 +39,7 @@ public class CommentVO {
 	}
 	@Override
 	public String toString() {
-		return "CommentVO [cmtcode=" + cmtcode + ", cmdbrdcode=" + cmdbrdcode + ", cmtusercode=" + cmtusercode
+		return "CommentVO [cmtcode=" + cmtcode + ", cmdbrdcode=" + cmtbrdcode + ", cmtusercode=" + cmtusercode
 				+ ", cmtwriter=" + cmtwriter + ", cmtcontent=" + cmtcontent + "]";
 	}
 	

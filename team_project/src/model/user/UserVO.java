@@ -1,4 +1,4 @@
-package model.VO;
+package model.user;
 
 public class UserVO {
 	private int usercode;

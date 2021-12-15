@@ -1,9 +1,9 @@
-package model.VO;
+package model.coin;
 
 public class CoinVO {
 	private String marketname;
 	private int coinpricekor;
-	private int conpriceeng;
+	private int coinpriceeng;
 	private int coinrate;
 	private int coinratepct;
 	private int coinpremium;
@@ -21,11 +21,11 @@ public class CoinVO {
 	public void setCoinpricekor(int coinpricekor) {
 		this.coinpricekor = coinpricekor;
 	}
-	public int getConpriceeng() {
-		return conpriceeng;
+	public int getCoinpriceeng() {
+		return coinpriceeng;
 	}
-	public void setConpriceeng(int conpriceeng) {
-		this.conpriceeng = conpriceeng;
+	public void setCoinpriceeng(int coinpriceeng) {
+		this.coinpriceeng = coinpriceeng;
 	}
 	public int getCoinrate() {
 		return coinrate;
@@ -53,7 +53,7 @@ public class CoinVO {
 	}
 	@Override
 	public String toString() {
-		return "CoinVO [coinname=" + marketname + ", coinpricekor=" + coinpricekor + ", conpriceeng=" + conpriceeng
+		return "CoinVO [coinname=" + marketname + ", coinpricekor=" + coinpricekor + ", conpriceeng=" + coinpriceeng
 				+ ", coinrate=" + coinrate + ", coinratepct=" + coinratepct + ", coinpremium=" + coinpremium
 				+ ", coindeal=" + coindeal + "]";
 	}
