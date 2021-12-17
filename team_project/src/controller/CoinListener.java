@@ -39,7 +39,8 @@ public class CoinListener implements ServletContextListener, ServletContextAttri
 
 
     public void contextInitialized(ServletContextEvent sce)  { 
-         
+             	
+    	System.out.println("로그: 서버 시작됨");
     }
 	
 }
