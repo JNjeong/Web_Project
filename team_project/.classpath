@@ -14,5 +14,6 @@
 	<classpathentry kind="lib" path="C:/Users/owner/Desktop/Education/EDU_resources/jstl.jar"/>
 	<classpathentry kind="lib" path="C:/Users/owner/Desktop/Education/EDU_resources/ojdbc6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/owner/Desktop/Education/EDU_resources/standard.jar"/>
+	<classpathentry kind="lib" path="C:/Users/owner/Desktop/Education/EDU_resources/selenium-server-4.1.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
