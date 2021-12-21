@@ -25,8 +25,8 @@ public class CoinDAO {
 			pstmt.setInt(2, coinvo.getCoinpricekor());
 			pstmt.setInt(3, coinvo.getCoinpriceeng());
 			pstmt.setInt(4, coinvo.getCoinrate());
-			pstmt.setInt(5, coinvo.getCoinratepct());
-			pstmt.setInt(6, coinvo.getCoinpremium());
+			pstmt.setDouble(5, coinvo.getCoinratepct());
+			pstmt.setDouble(6, coinvo.getCoinpremium());
 			pstmt.setInt(7, coinvo.getCoindeal());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -52,8 +52,8 @@ public class CoinDAO {
 				vo.setCoinpricekor(rs.getInt("COINPRICEKOR"));
 				vo.setCoinpriceeng(rs.getInt("COINPRICEENG"));
 				vo.setCoinrate(rs.getInt("COINRATE"));
-				vo.setCoinratepct(rs.getInt("COINRATEPCT"));
-				vo.setCoinpremium(rs.getInt("COINPREMIUM"));
+				vo.setCoinratepct(rs.getDouble("COINRATEPCT"));
+				vo.setCoinpremium(rs.getDouble("COINPREMIUM"));
 				vo.setCoindeal(rs.getInt("COINDEAL"));
 				
 				arrcoin.add(vo);

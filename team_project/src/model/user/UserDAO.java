@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.common.JDBCUtil;
 
@@ -18,6 +19,8 @@ public class UserDAO {
 	String sql_delete = "DELETE FROM TB_USERINFO WHERE USERCODE=?";
 	String sql_selectOne = "SELECT * FROM TB_USERINFO WHERE USERCODE=?";
 	String sql_userIdChk = "SELECT USERID FROM TB_USERINFO";
+	String sql_selectAll = "SELECT * FROM TB_USERINFO";
+	String sql_UserLogin = "SELECT * FROM TB_USERINFO WHERE USERID=? AND USERPW=?";
 	
 
 	
@@ -129,5 +132,49 @@ public class UserDAO {
 			JDBCUtil.disconnect(pstmt, conn);
 		}
 		return true;
+	}
+	public ArrayList<UserVO> UserSelectAll(){
+		conn = JDBCUtil.connect();
+		ArrayList<UserVO> arruser = new ArrayList<UserVO>();
+		UserVO vo = null;
+		try {
+			pstmt = conn.prepareStatement(sql_selectAll);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				vo = new UserVO();
+				vo.setUsercode(rs.getInt("USERCODE"));
+				vo.setUserid(rs.getString("USERID"));
+				vo.setUserpw(rs.getString("USERPW"));
+				vo.setUsername(rs.getString("USERNAME"));
+				vo.setUserphone(rs.getString("USERPHONE"));
+				vo.setUseremail(rs.getString("USEREMAIL"));
+				arruser.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("UserDAO에서 selectAll구문 실행중 에러 발생!");
+			e.printStackTrace();
+			return null;
+		}
+		return arruser;
+	}
+	public UserVO UserLogin(String userid, String userpw) {
+		conn = JDBCUtil.connect();
+		UserVO vo = null;
+		try {
+			pstmt = conn.prepareStatement(sql_UserLogin);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			vo.setUsercode(rs.getInt("USERCODE"));
+			vo.setUserid(rs.getString("USERID"));
+			vo.setUserpw(rs.getString("USERPW"));
+			vo.setUsername(rs.getString("USERNAME"));
+			vo.setUserphone(rs.getString("USERPHONE"));
+			vo.setUseremail(rs.getString("USEREMAIL"));
+		} catch (SQLException e) {
+			System.out.println("UserDAO에서 UserLogin구문 실행중 에러 발생!");
+			e.printStackTrace();
+			return null;
+		}
+		return vo;
 	}
 }
