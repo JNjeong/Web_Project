@@ -9,7 +9,7 @@ public class webDriver {
 	//드라이버 아이디
 	private final String WEB_DRIVER_ID ="webdriver.chrome.driver";											
 	//드라이버 경로
-	private final String WEB_DRIVER_PATH = "G:\\CSE\\WebDevelop_back\\JSP\\JSP_workspace\\team_project\\chromedriver.exe";	
+	private final String WEB_DRIVER_PATH = "C:\\Users\\nowonjae.JH_WJ\\Desktop\\project\\resorce\\chromedriver.exe";	
 
 	public ChromeDriver getDriver(String url) {
 		try {
