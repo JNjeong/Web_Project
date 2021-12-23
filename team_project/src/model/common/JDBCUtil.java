@@ -9,8 +9,8 @@ public class JDBCUtil {
     static String driver = "oracle.jdbc.driver.OracleDriver";
 	static String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	//아래 user와 password 만 본인 서버 아이디와 비밀번호로 변경해주세요.
-	static String user ="system";
-	static String password= "0000";
+	static String user ="nowonjae";
+	static String password= "111111";
 	
 	
 	public static Connection connect() {
