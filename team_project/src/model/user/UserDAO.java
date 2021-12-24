@@ -17,10 +17,10 @@ public class UserDAO {
 	String sql_insert = "INSERT INTO TB_USERINFO VALUES(USERSEQ.NEXTVAL, ?, ?, ?, ?, ?)";
 	String sql_update = "UPDATE TB_USERINFO SET USERPW=?, USERNAME=?, USERPHONE=?, USEREMAIL=? WHERE USERCODE=?";
 	String sql_delete = "DELETE FROM TB_USERINFO WHERE USERCODE=?";
-	String sql_selectOne = "SELECT * FROM TB_USERINFO WHERE USERCODE=?";
+	String sql_selectOne = "SELECT * FROM TB_USERINFO WHERE USERID=? AND USERPW=?";
 	String sql_userIdChk = "SELECT USERID FROM TB_USERINFO";
 	String sql_selectAll = "SELECT * FROM TB_USERINFO";
-	String sql_UserLogin = "SELECT * FROM TB_USERINFO WHERE USERID=? AND USERPW=?";
+
 	
 
 	
@@ -89,12 +89,13 @@ public class UserDAO {
 		return true;
 	}
 	
-	public UserVO UserSelectOne(UserVO uservo) {
+	public UserVO UserSelectOne(String userid, String userpw) {
 		UserVO vo = null;
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_selectOne);
-			pstmt.setInt(1, uservo.getUsercode());
+			pstmt.setString(1, userid);
+			pstmt.setString(2, userpw);
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
 			vo = new UserVO();
@@ -157,24 +158,5 @@ public class UserDAO {
 		}
 		return arruser;
 	}
-	public UserVO UserLogin(String userid, String userpw) {
-		conn = JDBCUtil.connect();
-		UserVO vo = null;
-		try {
-			pstmt = conn.prepareStatement(sql_UserLogin);
-			ResultSet rs = pstmt.executeQuery();
-			rs.next();
-			vo.setUsercode(rs.getInt("USERCODE"));
-			vo.setUserid(rs.getString("USERID"));
-			vo.setUserpw(rs.getString("USERPW"));
-			vo.setUsername(rs.getString("USERNAME"));
-			vo.setUserphone(rs.getString("USERPHONE"));
-			vo.setUseremail(rs.getString("USEREMAIL"));
-		} catch (SQLException e) {
-			System.out.println("UserDAO에서 UserLogin구문 실행중 에러 발생!");
-			e.printStackTrace();
-			return null;
-		}
-		return vo;
-	}
+
 }

@@ -20,7 +20,7 @@ public class MainAction implements Action{
 
 		//코인판 정보 받아오기
 		CoinDAO coindao = new CoinDAO();
-		ArrayList<CoinVO> coinarr = coindao.CoinSelet();
+		ArrayList<CoinVO> coinarr = coindao.CoinSelect();
 		request.setAttribute("coinarr", coinarr);
 		
 		//좋아요 된 게시글 받아오기

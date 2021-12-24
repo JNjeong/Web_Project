@@ -25,8 +25,8 @@ public class CoinDAO {
 			pstmt.setInt(2, coinvo.getCoinpricekor());
 			pstmt.setInt(3, coinvo.getCoinpriceeng());
 			pstmt.setInt(4, coinvo.getCoinrate());
-			pstmt.setDouble(5, coinvo.getCoinratepct());
-			pstmt.setDouble(6, coinvo.getCoinpremium());
+			pstmt.setFloat(5, coinvo.getCoinratepct());
+			pstmt.setFloat(6,  coinvo.getCoinpremium());
 			pstmt.setInt(7, coinvo.getCoindeal());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -39,7 +39,7 @@ public class CoinDAO {
 		return true;
 	}
 	
-	public ArrayList<CoinVO> CoinSelet() {
+	public ArrayList<CoinVO> CoinSelect() {
 		ArrayList<CoinVO> arrcoin = new ArrayList<CoinVO>();
 		CoinVO vo = null;
 		conn = JDBCUtil.connect();
@@ -52,8 +52,8 @@ public class CoinDAO {
 				vo.setCoinpricekor(rs.getInt("COINPRICEKOR"));
 				vo.setCoinpriceeng(rs.getInt("COINPRICEENG"));
 				vo.setCoinrate(rs.getInt("COINRATE"));
-				vo.setCoinratepct(rs.getDouble("COINRATEPCT"));
-				vo.setCoinpremium(rs.getDouble("COINPREMIUM"));
+				vo.setCoinratepct(rs.getFloat("COINRATEPCT"));
+				vo.setCoinpremium(rs.getFloat("COINPREMIUM"));
 				vo.setCoindeal(rs.getInt("COINDEAL"));
 				
 				arrcoin.add(vo);
@@ -68,5 +68,5 @@ public class CoinDAO {
 		return arrcoin;
 	}
 	
-	//CoinUpdate() 미예정
+	
 }

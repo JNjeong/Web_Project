@@ -45,15 +45,6 @@ public class FrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		else if(command.equals("/login.do")) {
-			try {
-				forward = new LoginAction().execute(request, response);
-			}
-			catch (Exception e) {
-				System.out.println("FrontController에서 login 요청중 에러 발생!");
-				e.printStackTrace();
-			}
-		}
 		else if(command.equals("/LoginToMain.do")) {
 			try {
 				forward = new LoginToMainAction().execute(request, response);

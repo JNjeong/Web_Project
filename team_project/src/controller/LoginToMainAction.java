@@ -21,7 +21,7 @@ public class LoginToMainAction implements Action{
 		//로그인시 넘어오는 아이디, 비밀번호 받아오기
 		String userid = request.getParameter("userid");	
 		String userpw = request.getParameter("userpw");
-		UserVO vo = dao.UserLogin(userid, userpw);	//아이디와 비밀번호에 맞는 사용자 정보 반환
+		UserVO vo = dao.UserSelectOne(userid, userpw);	//아이디와 비밀번호에 맞는 사용자 정보 반환
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("currUser", vo);	//세선에 사용자 정보 저장

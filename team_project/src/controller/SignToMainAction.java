@@ -16,7 +16,7 @@ public class SignToMainAction implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		UserDAO dao = new UserDAO();
+		UserDAO dao = new UserDOA();
 		ArrayList<UserVO> userarr = dao.UserSelectAll();
 		request.setAttribute("userarr", userarr); //중복체크시에 사용할 userlist를 보냄
 		
