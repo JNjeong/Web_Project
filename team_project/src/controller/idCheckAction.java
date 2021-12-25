@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +15,13 @@ public class idCheckAction implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		UserDAO dao = new UserDOA();
+		String userId = request.getParameter("userid");
 		
+		UserDAO dao = new UserDAO();
+		int idCheck = dao.UserIdChk(userId);
+		
+		PrintWriter out = response.getWriter();
+		out.write(idCheck + "");
 		
 		
 		

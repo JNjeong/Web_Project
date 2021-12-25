@@ -63,15 +63,6 @@ public class FrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		else if(command.equals("/SignToMain.do")) {
-			try {
-				forward = new SignToMainAction().execute(request, response);
-			}
-			catch (Exception e) {
-				System.out.println("FrontController에서 SignToMain 요청중 에러 발생!");
-				e.printStackTrace();
-			}
-		}
 		else if(command.equals("/idCheck.do")) {
 			try {
 				forward = new idCheckAction().execute(request, response); 
