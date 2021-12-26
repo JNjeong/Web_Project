@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,12 +24,27 @@ public class LoginToMainAction implements Action{
 		String userpw = request.getParameter("userpw");
 		UserVO vo = dao.UserSelectOne(userid, userpw);	//아이디와 비밀번호에 맞는 사용자 정보 반환
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("currUser", vo);	//세선에 사용자 정보 저장
+		ActionForward forward = null;
+		PrintWriter out = response.getWriter();
 		
-		ActionForward forward = new ActionForward();
-		forward.setPath("main.do");
-		forward.setRedirect(false);
+		if(vo != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("currUser", vo);	//세선에 사용자 정보 저장
+			
+			out.println("<script></script>");
+			
+			forward = new ActionForward();
+			forward.setPath("main.do");
+			forward.setRedirect(false);
+		}
+		else {
+			
+			out.println("<script>alert('아이디와 비밀번호가 일치하지 않습니다.');</script>");
+			
+			forward = new ActionForward();
+			forward.setPath("login.jsp");
+			forward.setRedirect(true);
+		}
 		return forward;
 	}
 

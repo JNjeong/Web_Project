@@ -23,8 +23,6 @@ public class idCheckAction implements Action{
 		PrintWriter out = response.getWriter();
 		out.write(idCheck + "");
 		
-		
-		
 		return null;
 	}
 
