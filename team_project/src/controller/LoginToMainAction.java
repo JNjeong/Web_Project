@@ -31,7 +31,8 @@ public class LoginToMainAction implements Action{
 			HttpSession session = request.getSession();
 			session.setAttribute("currUser", vo);	//세선에 사용자 정보 저장
 			
-			out.println("<script></script>");
+			String username = vo.getUsername();
+			out.println("<script>alert(username+'님 반갑습니다.');</script>");
 			
 			forward = new ActionForward();
 			forward.setPath("main.do");
@@ -39,11 +40,11 @@ public class LoginToMainAction implements Action{
 		}
 		else {
 			
-			out.println("<script>alert('아이디와 비밀번호가 일치하지 않습니다.');</script>");
+			out.println("<script>alert('아이디와 비밀번호가 일치하지 않습니다.');history.go(-1);</script>");
 			
-			forward = new ActionForward();
-			forward.setPath("login.jsp");
-			forward.setRedirect(true);
+//			forward = new ActionForward();
+//			forward.setPath("login.jsp");
+//			forward.setRedirect(true);
 		}
 		return forward;
 	}

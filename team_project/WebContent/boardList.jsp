@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+boardList.jsp 페이지입니다.
 </body>
 </html>
