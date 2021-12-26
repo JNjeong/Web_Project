@@ -31,7 +31,7 @@ public class UserInsertAction implements Action{
 			System.out.println("사용자 정보 저장 성공!");
 		}
 		else {
-			System.out.println("사용자 정보 저장 실패");		
+			System.out.println("사용자 정보 저장 실패");
 		}
 		
 		

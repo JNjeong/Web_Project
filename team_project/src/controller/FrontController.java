@@ -45,15 +45,6 @@ public class FrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		else if(command.equals("/login.do")) {
-			try {
-				forward = new LoginAction().execute(request, response);
-			}
-			catch (Exception e) {
-				System.out.println("FrontController에서 login 요청중 에러 발생!");
-				e.printStackTrace();
-			}
-		}
 		else if(command.equals("/LoginToMain.do")) {
 			try {
 				forward = new LoginToMainAction().execute(request, response);
@@ -69,15 +60,6 @@ public class FrontController extends HttpServlet {
 			}
 			catch (Exception e) {
 				System.out.println("FrontController에서 logout 요청중 에러 발생!");
-				e.printStackTrace();
-			}
-		}
-		else if(command.equals("/SignToMain.do")) {
-			try {
-				forward = new SignToMainAction().execute(request, response);
-			}
-			catch (Exception e) {
-				System.out.println("FrontController에서 SignToMain 요청중 에러 발생!");
 				e.printStackTrace();
 			}
 		}

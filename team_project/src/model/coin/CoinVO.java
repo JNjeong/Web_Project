@@ -5,8 +5,8 @@ public class CoinVO {
 	private int coinpricekor;
 	private int coinpriceeng;
 	private int coinrate;
-	private double coinratepct;
-	private double coinpremium;
+	private float coinratepct;
+	private float coinpremium;
 	private int coindeal;
 	
 	public String getMarketname() {
@@ -30,19 +30,19 @@ public class CoinVO {
 	public int getCoinrate() {
 		return coinrate;
 	}
-	public void setCoinratepct(double coinratepct) {
-		this.coinratepct = coinratepct;
-	}
-	public double getCoinratepct() {
-		return coinratepct;
-	}
 	public void setCoinrate(int coinrate) {
 		this.coinrate = coinrate;
 	}
-	public double getCoinpremium() {
+	public float getCoinratepct() {
+		return coinratepct;
+	}
+	public void setCoinratepct(float coinratepct) {
+		this.coinratepct = coinratepct;
+	}
+	public float getCoinpremium() {
 		return coinpremium;
 	}
-	public void setCoinpremium(double coinpremium) {
+	public void setCoinpremium(float coinpremium) {
 		this.coinpremium = coinpremium;
 	}
 	public int getCoindeal() {
