@@ -106,7 +106,7 @@ public class UserDAO {
 			vo.setUseremail(rs.getString("USEREMAIL"));
 			
 		} catch (SQLException e) {
-			System.out.println("UserDAO에서 delete구문 실행중 에러 발생!");
+			System.out.println("UserDAO에서 UserSelectOne구문 실행중 에러 발생!");
 			e.printStackTrace();
 			return null;
 		} finally {

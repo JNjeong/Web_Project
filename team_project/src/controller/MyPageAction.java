@@ -25,11 +25,7 @@ public class MyPageAction implements Action{
 			forward.setPath("mypage.jsp");
 			forward.setRedirect(false);
 		}
-		else {
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('로그인 후 이동됩니다.'); history.go(-1);</script>");
-		}
-		
+	
 		return forward;
 	}
 
