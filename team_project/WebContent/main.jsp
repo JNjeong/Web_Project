@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>BCO판</title>
 	<jsp:include page="head.jsp"></jsp:include>
 	<title>메인</title>
 </head>
 
-<body>
+<body>	
 
 	<jsp:include page="header.jsp"></jsp:include>
 
