@@ -34,6 +34,8 @@ public class FrontController extends HttpServlet {
 		String contextpath = request.getContextPath();
 		String command = uri.substring(contextpath.length());
 		
+		request.setCharacterEncoding("UTF-8");
+		
 		//요청사항 파악하기
 		ActionForward forward = null;
 		if(command.equals("/main.do")) {
