@@ -15,15 +15,15 @@ public class BoardDAO {
 	PreparedStatement pstmt;
 	   
 	/* DB에서 사용될 sql구문 정의 */
-	String sql_insert = "INSERT INTO TB_BOARD VALUES(BRDSEQ.NEXTVAL, ?, ?, ?, ?)";
-	String sql_selectOne = "SELECT BRDCODE, BRDSUERCODE, BRDTITLE, BRDWRITER, BRDCONTENT, TO_CHAR(BRDDATE, 'YYYYMMDD'), BRDVISITED BRDLIKE, BRDDISLIKE FROM TB_BOARD WHERE BRDCODE=?";
+	String sql_insert = "INSERT INTO TB_BOARD (BRDCODE, BRDUSERCODE, BRDTITLE, BRDWRITER, BRDCONTENT) VALUES(BRDSEQ.NEXTVAL, ?, ?, ?, ?)";
+	String sql_selectOne = "SELECT BRDCODE, BRDUSERCODE, BRDTITLE, BRDWRITER, BRDCONTENT, TO_CHAR(BRDDATE, 'YYYYMMDD') BRDDATE, BRDVISITED, BRDLIKE, BRDDISLIKE FROM TB_BOARD WHERE BRDCODE=?";
 	String sql_update = "UPDATE TB_BOARD SET BRDTITLE=?, BRDCONTENT=? WHERE BRDCODE=?";
 	String sql_delete = "DELETE FROM TB_BOARD WHERE BRDCODE=?";
-	String sql_selectAll = "SELECT BRDCODE, BRDUSERCODE, BRDTITLE, BRDWRITER, BRDCONTENT, TO_CHAR(BRDDATE, 'YYYYMMDD'), BRDVISITED, BRDLIKE, BRDDISLIKE FROM TB_BOARD";
+	String sql_selectAll = "SELECT BRDCODE, BRDUSERCODE, BRDTITLE, BRDWRITER, BRDCONTENT, TO_CHAR(BRDDATE, 'YYYYMMDD') BRDDATE, BRDVISITED, BRDLIKE, BRDDISLIKE FROM TB_BOARD";
 	String sql_like = "SELECT BRDLIKE = BRDLIKE+1 FROM TB_BOARD WHERE BRDCODE=?";
 	String sql_dislike = "SELECT BRDDISLIKE=BRDDISLIKE+1 FROM TB_BOARD WHERE BRDCODE=?";
-	String sql_selectFiltered = "SELECT BRDCODE, BRDUSERCODE, BRDTITLE, BRDWRITER, BRDCONTENT, TO_CHAR(BRDDATE, 'YYYYMMDD'), BRDVISITED, BRDLIKE, BRDDISLIKE FROM TB_BOARD WHERE";
-	String sql_selectLikeFiltered = "SELECT BRDCODE, BRDUSERCODE, BRDTITLE, BRDWRITER, BRDCONTENT, TO_CHAR(BRDDATE, 'YYYYMMDD'), BRDVISITED, BRDLIKE, BRDDISLIKE FROM TB_BOARD ORDER BY BRDLIKE DESC WHERE BRDLIKE>0";
+	String sql_selectFiltered = "SELECT BRDCODE, BRDUSERCODE, BRDTITLE, BRDWRITER, BRDCONTENT, TO_CHAR(BRDDATE, 'YYYYMMDD') BRDDATE, BRDVISITED, BRDLIKE, BRDDISLIKE FROM TB_BOARD WHERE";
+	String sql_selectLikeFiltered = "SELECT BRDCODE, BRDUSERCODE, BRDTITLE, BRDWRITER, BRDCONTENT, TO_CHAR(BRDDATE, 'YYYY/MM/DD') AS BRDDATE, BRDVISITED, BRDLIKE, BRDDISLIKE FROM TB_BOARD WHERE BRDLIKE>0 ORDER BY BRDLIKE DESC";
 	
 	public boolean BrdInsert(BoardVO boardvo, UserVO uservo) {
 		conn = JDBCUtil.connect();
@@ -67,6 +67,7 @@ public class BoardDAO {
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_delete);
+			pstmt.setInt(1, boardvo.getBrdcode());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("BoardDAO에서 delete구문 실행중 에러 발생!");
@@ -95,7 +96,7 @@ public class BoardDAO {
 				vo.setBrddate(rs.getString("BRDDATE"));
 				vo.setBrdvisited(rs.getInt("BRDVISITED"));
 				vo.setBrdlike(rs.getInt("BRDLIKE"));
-				vo.setBrddislike(rs.getInt("BRDDISLIKE"));				
+				vo.setBrddislike(rs.getInt("BRDDISLIKE"));
 				arrboard.add(vo);
 			}
 		} catch (SQLException e) {
@@ -190,7 +191,7 @@ public class BoardDAO {
 				arrboard.add(vo);
 			}
 		} catch (SQLException e) {
-			System.out.println("BoardDAO에서 insert구문 실행중 에러 발생!");
+			System.out.println("BoardDAO에서 BrdSearchFilter구문 실행중 에러 발생!");
 			e.printStackTrace();
 			return null;
 		} finally {
@@ -221,7 +222,7 @@ public class BoardDAO {
 				arrboard.add(vo);
 			}
 		} catch (SQLException e) {
-			System.out.println("BoardDAO에서 insert구문 실행중 에러 발생!");
+			System.out.println("BoardDAO에서 BrdLikeFilter구문 실행중 에러 발생!");
 			e.printStackTrace();
 			return null;
 		} finally {

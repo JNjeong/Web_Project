@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.common.JDBCUtil;
 
@@ -16,13 +17,14 @@ public class UserDAO {
 	String sql_insert = "INSERT INTO TB_USERINFO VALUES(USERSEQ.NEXTVAL, ?, ?, ?, ?, ?)";
 	String sql_update = "UPDATE TB_USERINFO SET USERPW=?, USERNAME=?, USERPHONE=?, USEREMAIL=? WHERE USERCODE=?";
 	String sql_delete = "DELETE FROM TB_USERINFO WHERE USERCODE=?";
-	String sql_selectOne = "SELECT * FROM TB_USERINFO WHERE USERCODE=?";
-	String sql_userIdChk = "SELECT USERID FROM TB_USERINFO";
+	String sql_selectOne = "SELECT * FROM TB_USERINFO WHERE USERID=? AND USERPW=?";
+	String sql_userIdChk = "SELECT * FROM TB_USERINFO WHERE USERID=?";
+
 	
 
 	
-	public boolean UserInsert(UserVO uservo, boolean userIdChkResult) {
-		if(userIdChkResult) {
+	public boolean UserInsert(UserVO uservo, boolean userIdChkResult, boolean userPwChkResult) {
+		if(userIdChkResult && userPwChkResult) {
 			conn = JDBCUtil.connect();
 			try {
 				pstmt = conn.prepareStatement(sql_insert);
@@ -43,7 +45,7 @@ public class UserDAO {
 			return true;
 		}
 		else {
-			System.out.println("아이디 중복검사 결과가 false이므로 회원가입 실패!");
+			System.out.println("아이디 중복검사 혹은 비밀번호 결과가 false이므로 회원가입 실패!");
 			return false;
 		}
 	}
@@ -86,12 +88,13 @@ public class UserDAO {
 		return true;
 	}
 	
-	public UserVO UserSelectOne(UserVO uservo) {
+	public UserVO UserSelectOne(String userid, String userpw) {
 		UserVO vo = null;
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_selectOne);
-			pstmt.setInt(1, uservo.getUsercode());
+			pstmt.setString(1, userid);
+			pstmt.setString(2, userpw);
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
 			vo = new UserVO();
@@ -103,7 +106,7 @@ public class UserDAO {
 			vo.setUseremail(rs.getString("USEREMAIL"));
 			
 		} catch (SQLException e) {
-			System.out.println("UserDAO에서 delete구문 실행중 에러 발생!");
+			System.out.println("UserDAO에서 UserSelectOne구문 실행중 에러 발생!");
 			e.printStackTrace();
 			return null;
 		} finally {
@@ -112,22 +115,29 @@ public class UserDAO {
 		return vo;
 	}
 	
-	public boolean UserIdChk(UserVO uservo) {
+	public int UserIdChk(String userid) {
 		conn = JDBCUtil.connect();
+		int idCheckResult = 0;;
 		try {
 			pstmt = conn.prepareStatement(sql_userIdChk);
+			pstmt.setString(1,  userid);
 			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()) {
-				if(rs.getString("USERID").equals(uservo.getUserid())) return false;
+			if(rs.next() || userid.equals("")) {
+				idCheckResult = 0;
+			}
+			else {
+				idCheckResult = 1;
 			}
 			
 		} catch (SQLException e) {
 			System.out.println("UserDAO에서 userIdChk구문 실행중 에러 발생!");
 			e.printStackTrace();
-			return false;
+			return -1;
 		} finally {
 			JDBCUtil.disconnect(pstmt, conn);
 		}
-		return true;
+		return idCheckResult;
 	}
+
+
 }
