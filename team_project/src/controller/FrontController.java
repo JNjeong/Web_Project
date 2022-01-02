@@ -173,7 +173,7 @@ public class FrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		else if(command.equals("boardInsert.do")) {
+		else if(command.equals("/boardInsert.do")) {
 			try {
 				forward = new BoardInsertAction().execute(request, response);
 			}

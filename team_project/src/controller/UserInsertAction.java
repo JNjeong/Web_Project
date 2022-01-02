@@ -18,7 +18,8 @@ public class UserInsertAction implements Action{
          throws ServletException, IOException {
 
       UserDAO dao = new UserDAO();
-      Boolean userIdChkResult = Boolean.parseBoolean(request.getParameter("userIdChkResult"));   //중복확인 검사 결과 받아오기
+      Boolean userIdChkResult = Boolean.parseBoolean(request.getParameter("userIdChkResult"));   //아이디 중복확인 검사 결과 받아오기
+      Boolean userPwChkResult = Boolean.parseBoolean(request.getParameter("userPwChkResult"));	 //비밀번호 중복확인 검사 결과 받아오기
       
       System.out.println(userIdChkResult);
       
@@ -33,7 +34,7 @@ public class UserInsertAction implements Action{
       PrintWriter out = response.getWriter();
        
       ActionForward forward = null;
-      if(dao.UserInsert(vo, userIdChkResult)) {
+      if(dao.UserInsert(vo, userIdChkResult, userPwChkResult)) {
             out.println("<script>alert('회원가입을 축하합니다!');location.href='/main.do';</script>");
       }
       else {

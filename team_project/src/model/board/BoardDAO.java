@@ -15,8 +15,8 @@ public class BoardDAO {
 	PreparedStatement pstmt;
 	   
 	/* DB에서 사용될 sql구문 정의 */
-	String sql_insert = "INSERT INTO TB_BOARD VALUES(BRDSEQ.NEXTVAL, ?, ?, ?, ?)";
-	String sql_selectOne = "SELECT BRDCODE, BRDSUERCODE, BRDTITLE, BRDWRITER, BRDCONTENT, TO_CHAR(BRDDATE, 'YYYYMMDD') BRDDATE, BRDVISITED BRDLIKE, BRDDISLIKE FROM TB_BOARD WHERE BRDCODE=?";
+	String sql_insert = "INSERT INTO TB_BOARD (BRDCODE, BRDUSERCODE, BRDTITLE, BRDWRITER, BRDCONTENT) VALUES(BRDSEQ.NEXTVAL, ?, ?, ?, ?)";
+	String sql_selectOne = "SELECT BRDCODE, BRDUSERCODE, BRDTITLE, BRDWRITER, BRDCONTENT, TO_CHAR(BRDDATE, 'YYYYMMDD') BRDDATE, BRDVISITED, BRDLIKE, BRDDISLIKE FROM TB_BOARD WHERE BRDCODE=?";
 	String sql_update = "UPDATE TB_BOARD SET BRDTITLE=?, BRDCONTENT=? WHERE BRDCODE=?";
 	String sql_delete = "DELETE FROM TB_BOARD WHERE BRDCODE=?";
 	String sql_selectAll = "SELECT BRDCODE, BRDUSERCODE, BRDTITLE, BRDWRITER, BRDCONTENT, TO_CHAR(BRDDATE, 'YYYYMMDD') BRDDATE, BRDVISITED, BRDLIKE, BRDDISLIKE FROM TB_BOARD";
@@ -67,6 +67,7 @@ public class BoardDAO {
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_delete);
+			pstmt.setInt(1, boardvo.getBrdcode());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("BoardDAO에서 delete구문 실행중 에러 발생!");
@@ -95,7 +96,7 @@ public class BoardDAO {
 				vo.setBrddate(rs.getString("BRDDATE"));
 				vo.setBrdvisited(rs.getInt("BRDVISITED"));
 				vo.setBrdlike(rs.getInt("BRDLIKE"));
-				vo.setBrddislike(rs.getInt("BRDDISLIKE"));				
+				vo.setBrddislike(rs.getInt("BRDDISLIKE"));
 				arrboard.add(vo);
 			}
 		} catch (SQLException e) {

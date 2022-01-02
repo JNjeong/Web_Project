@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="css/minor.css">
 <head>
+<meta charset="UTF-8">
 <jsp:include page="head.jsp"></jsp:include>
 <title>마이페이지</title>
 </head>
@@ -15,12 +17,11 @@
 	}
 </script>
 <body>
-
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="wrapper">
 	<div class="inner">
 	<section>
-			<h2 class="major">마이페이지</h2>
+			<h2 class="major" style="color:#fff; color:white; font-size: 30px; font-family:'EliceDigitalBaeum_Bold' !important;">MY PAGE</h2>
 			<form method="post" action="/userUpdate.do">
 				<div class="fields">
 					<div class="field">
@@ -47,7 +48,6 @@
 				</div>
 				<input class="button primary fit" type="submit" value="수정하기" />
 			</form>
-			
 			<input class="button primary fit" type="button" value="회원탈퇴" onclick="checkBeforeDelete()"/>
 	</section>
 	</div>

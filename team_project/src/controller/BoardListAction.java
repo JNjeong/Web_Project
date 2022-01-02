@@ -18,12 +18,13 @@ public class BoardListAction implements Action{
 
 		BoardDAO dao = new BoardDAO();
 		ArrayList<BoardVO> boardarr = dao.BrdSelectAll();
+
 		request.setAttribute("boardarr", boardarr);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("boardlist.jsp");
+		forward.setPath("boardList.jsp");
 		forward.setRedirect(false);
-		
+	
 		return forward;
 	}
 
