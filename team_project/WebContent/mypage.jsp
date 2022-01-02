@@ -33,7 +33,7 @@
 						<label for="password">Password</label>
 						<input type="password" name="userpw" id="userpw" value="${currUser.userpw }"/>
 					</div>
-										<div class="field">
+					<div class="field">
 						<label for="name">Name</label>
 						<input type="text" name="username" id="username" value="${currUser.username }"/>
 					</div>

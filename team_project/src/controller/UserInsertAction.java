@@ -35,11 +35,11 @@ public class UserInsertAction implements Action{
        
       ActionForward forward = null;
       if(dao.UserInsert(vo, userIdChkResult, userPwChkResult)) {
-            out.println("<script>alert('회원가입을 축하합니다!');location.href='/main.do';</script>");
-      }
-      else {
-         out.println("<script>alert('등록된 아이디가 있습니다.');history.go(-1);</script>");
-      }
+	      out.println("<script>alert('회원가입을 축하합니다!');location.href='/main.do';</script>");
+	  }
+	  else {
+	     out.println("<script>alert('등록된 아이디 or 비밀번호 확인');history.go(-1);</script>");
+	  }
       
       return forward;
    }

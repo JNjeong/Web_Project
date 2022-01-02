@@ -20,21 +20,23 @@ public class SearchListAction implements Action{
 		String typeKor = request.getParameter("type");
 		String typeDB = "";
 		switch(typeKor){
-			case "제목" : typeDB = "brdtitle";
-			case "작성자" : typeDB = "brdwriter";
-			case "내용" : typeDB = "brdcontent";
-			default : typeDB = "brdtitle";
+			case "제목" : typeDB = "BRDTITLE"; break;
+			case "작성자" : typeDB = "BRDWRITER"; break;
+			case "내용" : typeDB = "BRDCONTENT"; break;
+			default : typeDB = "BRDTITLE";
 		}
 		String result = request.getParameter("result");
+		ArrayList<BoardVO> boardarr = dao.BrdSearchFilter(typeDB, result);
+		int brdcount = boardarr.size();
 		
-		ArrayList<BoardVO> boardsearcharr = dao.BrdSearchFilter(typeDB, result);
-		request.setAttribute("boardsearcharr", boardsearcharr);
-			
+		request.setAttribute("boardarr", boardarr);
+		request.setAttribute("brdcount", brdcount);
+		
 		ActionForward forward = new ActionForward();
-		forward.setPath("boardlist.jsp");
+		forward.setPath("boardList.jsp");
 		forward.setRedirect(false);
 		
-		return null;
+		return forward;
 	}
 
 }
