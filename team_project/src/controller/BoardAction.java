@@ -11,6 +11,7 @@ import model.board.BoardDAO;
 import model.board.BoardVO;
 import model.comment.CommentDAO;
 import model.comment.CommentVO;
+import model.user.UserVO;
 
 public class BoardAction implements Action{
 
@@ -28,6 +29,15 @@ public class BoardAction implements Action{
 		BoardVO vo = brddao.BrdSelectOne(brdvo);
 		request.setAttribute("brdvo", vo);
 		
+		// 현재사용자 확인
+		UserVO userVO = (UserVO) request.getSession().getAttribute("currUser");
+		  
+		if(userVO != null && vo.getBrdusercode() == userVO.getUsercode()) {
+			request.setAttribute("user_eq", "T");
+		}
+		else request.setAttribute("user_eq", "F");
+	     
+	      
 		//댓글 출력
 		ArrayList<CommentVO> cmtarr = cmtdao.CmtSelectAll(brdvo);
 		request.setAttribute("cmtarr", cmtarr);

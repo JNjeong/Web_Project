@@ -17,21 +17,31 @@ public class BoardInsertAction implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		System.out.println("BoardInsertAction 입장");
+		
 		BoardDAO dao = new BoardDAO();
 		BoardVO vo = new BoardVO();
 		
+		System.out.println("Board 객체들 생성");
+		
 		HttpSession session = request.getSession();
 		UserVO uservo = (UserVO) session.getAttribute("currUser");
+		
+		System.out.println("User 정보 session에서 받아오기");
 
 		vo.setBrdtitle(request.getParameter("brdtitle"));
 		vo.setBrdwriter(uservo.getUsername());
 		vo.setBrdcontent(request.getParameter("brdcontent"));
 		
+		System.out.println("board객체에 값 대입하기");
 		
 		ActionForward forward = null;
+		System.out.println("forward 객체생성");
+		
 		if(dao.BrdInsert(vo, uservo)) {
+			System.out.println("dao에서 brdinsert 실행입장");
 			forward = new ActionForward();
-			forward.setPath("boardlist.do");
+			forward.setPath("boardList.do");
 			forward.setRedirect(true);
 		}
 		else {

@@ -23,8 +23,8 @@ public class UserDAO {
 	
 
 	
-	public boolean UserInsert(UserVO uservo, boolean userIdChkResult) {
-		if(userIdChkResult) {
+	public boolean UserInsert(UserVO uservo, boolean userIdChkResult, boolean userPwChkResult) {
+		if(userIdChkResult && userPwChkResult) {
 			conn = JDBCUtil.connect();
 			try {
 				pstmt = conn.prepareStatement(sql_insert);
@@ -45,7 +45,7 @@ public class UserDAO {
 			return true;
 		}
 		else {
-			System.out.println("아이디 중복검사 결과가 false이므로 회원가입 실패!");
+			System.out.println("아이디 중복검사 혹은 비밀번호 결과가 false이므로 회원가입 실패!");
 			return false;
 		}
 	}
