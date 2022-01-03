@@ -23,7 +23,7 @@ public class CmtUpdateAction implements Action{
 		ActionForward forward = null;
 		if(dao.CmtUpdate(vo)) {
 			forward = new ActionForward();
-			forward.setPath("board.do");
+			forward.setPath("/board.do?brdcode="+Integer.parseInt(request.getParameter("brdcode")));			
 			forward.setRedirect(true);
 		}
 		else {

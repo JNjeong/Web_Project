@@ -19,7 +19,10 @@ public class BoardListAction implements Action{
 		BoardDAO dao = new BoardDAO();
 		ArrayList<BoardVO> boardarr = dao.BrdSelectAll();
 
+		int brdcount = boardarr.size();
+		
 		request.setAttribute("boardarr", boardarr);
+		request.setAttribute("brdcount", brdcount);
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("boardList.jsp");

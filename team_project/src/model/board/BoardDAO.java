@@ -19,11 +19,12 @@ public class BoardDAO {
 	String sql_selectOne = "SELECT BRDCODE, BRDUSERCODE, BRDTITLE, BRDWRITER, BRDCONTENT, TO_CHAR(BRDDATE, 'YYYYMMDD') BRDDATE, BRDVISITED, BRDLIKE, BRDDISLIKE FROM TB_BOARD WHERE BRDCODE=?";
 	String sql_update = "UPDATE TB_BOARD SET BRDTITLE=?, BRDCONTENT=? WHERE BRDCODE=?";
 	String sql_delete = "DELETE FROM TB_BOARD WHERE BRDCODE=?";
-	String sql_selectAll = "SELECT BRDCODE, BRDUSERCODE, BRDTITLE, BRDWRITER, BRDCONTENT, TO_CHAR(BRDDATE, 'YYYYMMDD') BRDDATE, BRDVISITED, BRDLIKE, BRDDISLIKE FROM TB_BOARD";
-	String sql_like = "SELECT BRDLIKE = BRDLIKE+1 FROM TB_BOARD WHERE BRDCODE=?";
-	String sql_dislike = "SELECT BRDDISLIKE=BRDDISLIKE+1 FROM TB_BOARD WHERE BRDCODE=?";
-	String sql_selectFiltered = "SELECT BRDCODE, BRDUSERCODE, BRDTITLE, BRDWRITER, BRDCONTENT, TO_CHAR(BRDDATE, 'YYYYMMDD') BRDDATE, BRDVISITED, BRDLIKE, BRDDISLIKE FROM TB_BOARD WHERE";
+	String sql_selectAll = "SELECT BRDCODE, BRDUSERCODE, BRDTITLE, BRDWRITER, BRDCONTENT, TO_CHAR(BRDDATE, 'YYYY/MM/DD') BRDDATE, BRDVISITED, BRDLIKE, BRDDISLIKE FROM TB_BOARD ORDER BY BRDCODE DESC";
+	String sql_like = "UPDATE TB_BOARD SET BRDLIKE = BRDLIKE+1 WHERE BRDCODE=?";
+	String sql_dislike = "UPDATE TB_BOARD SET BRDDISLIKE=BRDDISLIKE+1 WHERE BRDCODE=?";
+	String sql_selectFiltered = "SELECT BRDCODE, BRDUSERCODE, BRDTITLE, BRDWRITER, BRDCONTENT, TO_CHAR(BRDDATE, 'YYYY/MM/DD') BRDDATE, BRDVISITED, BRDLIKE, BRDDISLIKE FROM TB_BOARD WHERE";
 	String sql_selectLikeFiltered = "SELECT BRDCODE, BRDUSERCODE, BRDTITLE, BRDWRITER, BRDCONTENT, TO_CHAR(BRDDATE, 'YYYY/MM/DD') AS BRDDATE, BRDVISITED, BRDLIKE, BRDDISLIKE FROM TB_BOARD WHERE BRDLIKE>0 ORDER BY BRDLIKE DESC";
+	String sql_visited = "UPDATE TB_BOARD SET BRDVISITED=BRDVISITED+1 WHERE BRDCODE=?";
 	
 	public boolean BrdInsert(BoardVO boardvo, UserVO uservo) {
 		conn = JDBCUtil.connect();
@@ -48,7 +49,7 @@ public class BoardDAO {
 	public boolean BrdUpdate(BoardVO boardvo) {
 		conn = JDBCUtil.connect();
 		try {
-			pstmt = conn.prepareStatement(sql_insert);
+			pstmt = conn.prepareStatement(sql_update);
 			pstmt.setString(1, boardvo.getBrdtitle());
 			pstmt.setString(2, boardvo.getBrdcontent());
 			pstmt.setInt(3, boardvo.getBrdcode());
@@ -169,13 +170,29 @@ public class BoardDAO {
 		return true;
 	}
 	
+	public boolean BrdVisited(BoardVO boardvo) {
+		conn=JDBCUtil.connect();
+		try {
+			pstmt = conn.prepareStatement(sql_visited);
+			pstmt.setInt(1, boardvo.getBrdcode());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("BoardDAO에서 visited구문 실행중 에러 발생!");
+			e.printStackTrace();
+			return false;
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return true;
+	}
+	
 	public ArrayList<BoardVO> BrdSearchFilter(String type, String result) {
 		ArrayList<BoardVO> arrboard = new ArrayList<BoardVO>();
 		BoardVO vo = null;
 		conn = JDBCUtil.connect();
-		try {
-			pstmt = conn.prepareStatement(sql_selectFiltered +type+ "LIKE (%" +result+ "%)");
-			ResultSet rs = pstmt.executeQuery();
+		try {			
+			pstmt = conn.prepareStatement(sql_selectFiltered +" "+type+" "+ "LIKE '%" +result+ "%'");
+			ResultSet rs = pstmt.executeQuery();			
 			while(rs.next()) {
 				vo = new BoardVO();
 				vo.setBrdcode(rs.getInt("BRDCODE"));
