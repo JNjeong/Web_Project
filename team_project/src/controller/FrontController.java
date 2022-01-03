@@ -156,8 +156,10 @@ public class FrontController extends HttpServlet {
 			}
 		}
 		else if(command.equals("/cmtInsert.do")) {
+			System.out.println("댓글등록 FC 입장");
 			try {
 				forward = new CmtInsertAction().execute(request, response);
+				System.out.println("댓글등록forward 성공적으로 생성");
 			}
 			catch (Exception e) {
 				System.out.println("FrontController에서 cmtInsert 요청중 에러 발생!");
