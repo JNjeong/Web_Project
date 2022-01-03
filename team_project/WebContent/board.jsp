@@ -23,7 +23,7 @@ const checkDeleteBoard = function() {
 		
 		<div class="wrapper">
 			<div class="inner">
-				<form action="boardUpdate.jsp" method="post">
+				<form action="/boardToUpdate.do" method="post">
 					<div class="table-wrapper">
 						<h1 style="color:#fff"><input type="text" name="brdtitle" value="${brdvo.brdtitle}" readonly/></h1>
 							<input type="hidden" value="${brdvo.brdcode}" name="brdcode"/>
