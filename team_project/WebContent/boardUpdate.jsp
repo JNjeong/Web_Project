@@ -17,14 +17,14 @@
 			<h2 class="major" style="color: #fff; font-family:'EliceDigitalBaeum_Bold';">글 수정</h2>
 			--%>			
 			<form method="post" action="/brdUpdate.do">
-			<input type="hidden" name="brdcode" id="brdcode" value=<%=request.getParameter("brdcode")%>>
-			<input type="hidden" name="brdwriter" id="brdwriter" value=<%=request.getParameter("brdwriter")%>>
+			<input type="hidden" name="brdcode" id="brdcode" value=${param.brdcode}>
+			<input type="hidden" name="brdwriter" id="brdwriter" value=${param.brdwriter}>
 				<div class="fields">
 					<div class="field">
-						<input type="text" name="brdtitle" id="brdtitle" placeholder="제목" value="<%=request.getParameter("brdtitle")%>" required/>
+						<input type="text" name="brdtitle" id="brdtitle" placeholder="제목" value="${param.brdtitle}" required/>
 					</div>
 					<div class="field">
-						<textarea name="brdcontent" id="brdcontent" rows="10" placeholder="내용"  required><%=request.getParameter("brdcontent")%></textarea>
+						<textarea name="brdcontent" id="brdcontent" rows="10" placeholder="내용"  required>${param.brdcontent}</textarea>
 					</div>
 				</div>
 				<input class="button primary" style="margin-left: 795px;" type="submit" value="등록" />

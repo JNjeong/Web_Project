@@ -21,11 +21,21 @@ public class BoardAction implements Action{
 
 		BoardDAO brddao = new BoardDAO();
 		CommentDAO cmtdao = new CommentDAO();
-		
-		//하나의 게시글 정보 출력
+						
 		BoardVO brdvo = new BoardVO();
 		brdvo.setBrdcode(Integer.parseInt(request.getParameter("brdcode")));
 		
+		ActionForward forward = null;
+		
+		//해당 게시글에 조회수 추가
+		if(brddao.BrdVisited(brdvo)) {
+			forward = new ActionForward();	//업데이트 성공이라면 forward를 생성, 실패라면 null로써 처리
+		}
+		else {
+			System.out.println("BoardAction에서 BrdVisited() 결과 : false");
+		}
+		
+		//하나의 게시글 정보 출력
 		BoardVO vo = brddao.BrdSelectOne(brdvo);
 		request.setAttribute("brdvo", vo);
 		
@@ -42,10 +52,10 @@ public class BoardAction implements Action{
 		ArrayList<CommentVO> cmtarr = cmtdao.CmtSelectAll(brdvo);
 		request.setAttribute("cmtarr", cmtarr);
 		
-		ActionForward forward = new ActionForward();
+		
 		forward.setPath("board.jsp");
 		forward.setRedirect(false);
-		
+
 		return forward;
 	}
 

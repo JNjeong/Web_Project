@@ -15,10 +15,7 @@ const checkDeleteBoard = function() {
 	     location.href="/brdDelete.do?brdcode="+${brdvo.brdcode};
 	 }else return;
 }
-const pageBack = function() {
-	console.log("fff");
-	history.go(-1);
-}
+
  
  </script>
 <body>
@@ -26,20 +23,20 @@ const pageBack = function() {
 		
 		<div class="wrapper">
 			<div class="inner">
-				<form action="boardUpdate.jsp" method="post">
+				<form action="/boardToUpdate.do" method="post">
 					<div class="table-wrapper">
 						<h1 style="color:#fff"><input type="text" name="brdtitle" value="${brdvo.brdtitle}" readonly/></h1>
 							<input type="hidden" value="${brdvo.brdcode}" name="brdcode"/>
 							<input type="text" value="작성자 : ${brdvo.brdwriter}" name="brdwriter" readonly/>
 							<input type="text" value="추천 :${brdvo.brdlike}" name="brdlike" readonly/>
 							<input type="text" value="비추천 : ${brdvo.brddislike}" name="brddislike" readonly/>
-							<input type="text" value="방문수 : ${brdvo.brdvisited}" name="brdvisited" readonly/>
+							<input type="text" value="조회수: ${brdvo.brdvisited}" name="brdvisited" readonly/>
 							<input type="text" value="작성날짜 : ${brdvo.brddate}" name="brddate"  readonly/>
 							<textarea name="brdcontent" id="brdcontent" rows="6" readonly="readonly">${brdvo.brdcontent}</textarea>
 					
 					
 					<div style="float:right; margin-top: 10px;margin-left:10px;">
-						<a href="#" onclick="pageBack()" class="button primary">뒤로가기</a>
+						<a href="/boardList.do" class="button primary">뒤로가기</a>
 					</div>
 					
 					<%

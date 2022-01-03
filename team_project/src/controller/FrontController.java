@@ -128,6 +128,15 @@ public class FrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		else if(command.equals("/boardToUpdate.do")){
+			try {
+				forward = new BoardToUpdateAction().execute(request, response);
+			}
+			catch(Exception e) {
+				System.out.println("FrontController에서 boardToUpdate 요청중 에러 발생!");
+				e.printStackTrace();
+			}
+		}
 		else if(command.equals("/brdUpdate.do")) {
 			try {
 				forward = new BrdUpdateAction().execute(request, response);
