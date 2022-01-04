@@ -19,7 +19,7 @@ public class CmtUpdateAction implements Action{
 		CommentVO vo = new CommentVO();
 		vo.setCmtcode(Integer.parseInt(request.getParameter("cmtcode")));
 		vo.setCmtcontent(request.getParameter("cmtcontent"));
-		
+		System.out.println(vo.getCmtcontent());
 		ActionForward forward = null;
 		if(dao.CmtUpdate(vo)) {
 			forward = new ActionForward();
