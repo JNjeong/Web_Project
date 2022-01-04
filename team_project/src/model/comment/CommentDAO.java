@@ -16,7 +16,7 @@ public class CommentDAO {
 	PreparedStatement pstmt;
 	
 	/* DB에서 사용될 sql구문 정의 */
-	String sql_selectAll = "SELECT * FROM TB_COMMENT WHERE BRDCODE=?";
+	String sql_selectAll = "SELECT * FROM TB_COMMENT WHERE CMTBRDCODE=?";
 	String sql_insert = "INSERT INTO TB_COMMENT VALUES(CMTSEQ.NEXTVAL, ?, ?, ?, ?)";
 	String sql_update = "UPDATE TB_COMMENT SET CMTCONTENT=? WHERE CMTCODE=?";
 	String sql_delete = "DELETE FROM TB_COMMENT WHERE CMTCODE=?";
@@ -55,7 +55,7 @@ public class CommentDAO {
 			pstmt = conn.prepareStatement(sql_insert);
 			pstmt.setInt(1, boardvo.getBrdcode());
 			pstmt.setInt(2, uservo.getUsercode());
-			pstmt.setString(3, commentvo.getCmtwriter());
+			pstmt.setString(3, uservo.getUsername());
 			pstmt.setString(4, commentvo.getCmtcontent());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -89,7 +89,7 @@ public class CommentDAO {
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_delete);
-			pstmt.setInt(1, commentvo.getCmdtrdcode());
+			pstmt.setInt(1, commentvo.getCmtcode());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("CommentDAO에서 delete구문 실행중 에러 발생!");

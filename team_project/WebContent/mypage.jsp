@@ -51,6 +51,10 @@
 			<input class="button primary fit" type="button" value="회원탈퇴" onclick="checkBeforeDelete()"/>
 	</section>
 	</div>
+	<jsp:include page="footer.jsp"/>
 	</div>
+	
+	
+
 </body>
 </html>

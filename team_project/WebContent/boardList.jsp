@@ -59,19 +59,18 @@
 						<input class="search" type="text" name="result" id="result" style="float:left; width:300px; display:inline-block; height:50px;">
 						<input type="submit" value="검색" style="float:left; display:inline-block; height: 50px; font-family:'EliceDigitalBaeum_Bold';">				
 					</form>
-					<%
-						if(session.getAttribute("currUser") != null){
-					%>
+
 							<a href="form.jsp" class="button primary" style="float:right;">글쓰기</a>
-					<%
-						}
-					%>
+	
 				
 				</div>
 			</div>
 		</section>
 		</div>
+			<jsp:include page="footer.jsp"/>
+		
 		</div>
+		
 </body>
 
 </html>
