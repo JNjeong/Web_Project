@@ -26,7 +26,7 @@ $(function(){
 	      
 	      location.href= "boardList.do";
 	   });
-	});
+});
  </script>
 
 <header style="background-color:#fff;">
