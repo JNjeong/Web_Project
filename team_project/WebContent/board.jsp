@@ -32,6 +32,16 @@ $(function(){
 			document.getElementById("submit").innerText = "수정완료";
 		}
 	});
+});$(function(){
+	$("#submitComment").click(function(){
+		 if("${currUser.usercode}"==""){
+			alert('로그인 후 이용가능합니다.');
+			return false;
+		}
+		else {
+			$("#commentForm").submit();
+		}
+	});
 });
 $(function(){
 	   
@@ -80,8 +90,8 @@ $(function(){
 						<a href="#" class="button primary" id="goBack">뒤로가기</a>
 					</div>
 				
-				<c:if test="${currUser}==''">		
-					<c:if test="${user_eq == 'F'}">	
+				<c:if test="${user_eq eq 'F'}">
+					<c:if test="${not empty currUser}">	
 						<div style="display:inline-block;">
 							<a href="/brdlike.do?brdcode=${brdvo.brdcode}" style="display:inline-block; margin-right: 10px;"><i class="fas fa-thumbs-up"></i><span>${brdvo.brdlike}명이 추천해요!</span></a>
 							<a href="/brddislike.do?brdcode=${brdvo.brdcode}" style="display:inline-block;"><i class="fas fa-thumbs-down"></i><span>${brdvo.brddislike}명이 비추천해요!</span></a>
@@ -149,7 +159,7 @@ $(function(){
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">                    
-                                <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment"><span class="glyphicon glyphicon-send"></span> Submit comment</button>
+                                <button class="btn btn-success btn-circle text-uppercase" id="submitComment"><span class="glyphicon glyphicon-send"></span> Submit comment</button>
                             </div>
                         </div>            
                     </form>
