@@ -19,17 +19,21 @@ const checkDeleteBoard = function() {
 }
 
 $(function(){
-	$("#submit").click(function(){
-		if(document.getElementById("submit").innerText == "수정완료"){
-			$('#cmtcommentbox').attr('readonly', true);
-			$('#cmtcommentbox').css('background-color','#f5f5f5');	
-			document.getElementById("submit").innerText = "수정";
+	$(".submitbtn").click(function(){
+		console.log('찾기시작');
+		console.log($(this));
+		console.log($(this).find("#editCmt").text());
+/* 		console.log($(this).slibings.find('#cmtcommentbox').text()); */
+		if($(this).find("#editCmt").text() == "수정완료"){
+			$(this).siblings().find('#cmtcommentbox').attr('readonly', true);
+			$(this).siblings().find('#cmtcommentbox').css('background-color','#f5f5f5');	
+			$(this).find("#editCmt").text('수정');
 			$("#cmtUpdate-form").submit();
 		}
-		else if(document.getElementById("submit").innerText =="수정"){
-			$('#cmtcommentbox').attr('readonly', false);
-			$('#cmtcommentbox').css('background-color','#fff');
-			document.getElementById("submit").innerText = "수정완료";
+		else if($(this).find("#editCmt").text() =="수정"){
+			$(this).siblings().find('#cmtcommentbox').attr('readonly', false);
+			$(this).siblings().find('#cmtcommentbox').css('background-color','#fff');
+			$(this).find("#editCmt").text('수정완료');
 		}
 	});
 });$(function(){
@@ -136,7 +140,7 @@ $(function(){
 					                  <textarea rows="" cols="" id="cmtcommentbox" name="cmtcontent" readonly>${cmtarr.cmtcontent}</textarea>
 					                </p>
 					                <c:if test="${currUser.usercode==cmtarr.cmtusercode}">
-					                	<a class="btn btn-info btn-circle text-uppercase" id="submit"><span class="glyphicon glyphicon-share-alt"></span>수정</a>	                
+					                	<a class="btn btn-info btn-circle text-uppercase submitbtn"><span class="glyphicon glyphicon-share-alt"></span><span id="editCmt">수정</span></a>	                
 					                	<a class="btn btn-info btn-circle text-uppercase" href="/cmtDelete.do?cmtcode=${cmtarr.cmtcode}&brdcode=${brdvo.brdcode}" id="reply"><span class="glyphicon glyphicon-share-alt"></span> 삭제</a>
 					                </c:if>
 					            </form>	
