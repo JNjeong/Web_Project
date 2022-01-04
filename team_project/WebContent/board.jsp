@@ -33,7 +33,19 @@ $(function(){
 		}
 	});
 });
-
+$(function(){
+	   
+	   $("#goBack").click(function(){
+	      
+	      console.log("${currUser.usercode}");
+	      if("${currUser.usercode}"==""){
+	         alert('로그인 후 이용가능합니다.');
+	         return;
+	      }
+	      
+	      location.href= "boardList.do";
+	   });
+});
 </script>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
@@ -65,15 +77,20 @@ $(function(){
 
 					
 					<div style="float:right; margin-top: 10px;margin-left:10px;">
-						<a href="/boardList.do" class="button primary">뒤로가기</a>
-					</div>
-					
-				<c:if test="${user_eq eq 'T'}">
-					<div style="display:inline-block;">
-						<a href="/brdlike.do?brdcode=${brdvo.brdcode}" style="display:inline-block; margin-right: 10px;"><i class="fas fa-thumbs-up"></i><span>${brdvo.brdlike}명이 추천해요!</span></a>
-						<a href="/brddislike.do?brdcode=${brdvo.brdcode}" style="display:inline-block;"><i class="fas fa-thumbs-down"></i><span>${brdvo.brddislike}명이 비추천해요!</span></a>
+						<a href="#" class="button primary" id="goBack">뒤로가기</a>
 					</div>
 				
+				<c:if test="${currUser}==''">		
+					<c:if test="${user_eq == 'F'}">	
+						<div style="display:inline-block;">
+							<a href="/brdlike.do?brdcode=${brdvo.brdcode}" style="display:inline-block; margin-right: 10px;"><i class="fas fa-thumbs-up"></i><span>${brdvo.brdlike}명이 추천해요!</span></a>
+							<a href="/brddislike.do?brdcode=${brdvo.brdcode}" style="display:inline-block;"><i class="fas fa-thumbs-down"></i><span>${brdvo.brddislike}명이 비추천해요!</span></a>
+						</div>
+					</c:if>
+				</c:if>
+					
+					
+				<c:if test="${user_eq == 'T'}">
                   <div style="float:right; margin-top: 10px;margin-left:10px;">
                      <input type="submit" class="button primary" value="수정" style="display:inline-block;">
                      <a href="#" onclick="checkDeleteBoard()" class="button primary" style="display:inline-block;">삭제</a>
