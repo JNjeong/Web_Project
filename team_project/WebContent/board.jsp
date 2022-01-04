@@ -19,23 +19,20 @@ const checkDeleteBoard = function() {
 }
 
 $(function(){
-	$(".submitbtn").click(function(){
-		console.log('찾기시작');
-		console.log($(this));
-		console.log($(this).find("#editCmt").text());
-/* 		console.log($(this).slibings.find('#cmtcommentbox').text()); */
-		if($(this).find("#editCmt").text() == "수정완료"){
-			$(this).siblings().find('#cmtcommentbox').attr('readonly', true);
-			$(this).siblings().find('#cmtcommentbox').css('background-color','#f5f5f5');	
-			$(this).find("#editCmt").text('수정');
-			$("#cmtUpdate-form").submit();
-		}
-		else if($(this).find("#editCmt").text() =="수정"){
-			$(this).siblings().find('#cmtcommentbox').attr('readonly', false);
-			$(this).siblings().find('#cmtcommentbox').css('background-color','#fff');
-			$(this).find("#editCmt").text('수정완료');
-		}
-	});
+	   $(".submitbtn").click(function(){
+
+	      if($(this).find("#editCmt").text() == "수정완료"){
+	         $(this).siblings().find('#cmtcommentbox').attr('readonly', true);
+	         $(this).siblings().find('#cmtcommentbox').css('background-color','#f5f5f5');   
+	         $(this).find("#editCmt").text('수정');
+	         $(this).parent("#cmtUpdate-form").submit();
+	      }
+	      else if($(this).find("#editCmt").text() =="수정"){
+	         $(this).siblings().find('#cmtcommentbox').attr('readonly', false);
+	         $(this).siblings().find('#cmtcommentbox').css('background-color','#fff');
+	         $(this).find("#editCmt").text('수정완료');
+	      }
+	   });
 });$(function(){
 	$("#submitComment").click(function(){
 		 if("${currUser.usercode}"==""){
